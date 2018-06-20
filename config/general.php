@@ -15,7 +15,7 @@ return [
         'defaultWeekStartDay' => 0,
 
         // Enable CSRF Protection (recommended)
-        'enableCsrfProtection' => true,
+        'enableCsrfProtection' => false,
 
         // Whether generated URLs should omit "index.php"
         'omitScriptNameInUrls' => true,
