@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "045be044bc26a4b8a6ce8463d36fe86c",
+    "content-hash": "1aab02ef39804a3d3d52ca78ea347a7e",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -407,20 +407,20 @@
         },
         {
             "name": "craftcms/element-api",
-            "version": "2.5.2",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/element-api.git",
-                "reference": "4619d809280fe4a82e6e0859aa51073820065008"
+                "reference": "50276cad7760e17a50db09bf3c20b4c36fef086f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/element-api/zipball/4619d809280fe4a82e6e0859aa51073820065008",
-                "reference": "4619d809280fe4a82e6e0859aa51073820065008",
+                "url": "https://api.github.com/repos/craftcms/element-api/zipball/50276cad7760e17a50db09bf3c20b4c36fef086f",
+                "reference": "50276cad7760e17a50db09bf3c20b4c36fef086f",
                 "shasum": ""
             },
             "require": {
-                "craftcms/cms": "^3.0.0-beta.31",
+                "craftcms/cms": "^3.0.0-RC11",
                 "league/fractal": "^0.16.0"
             },
             "type": "craft-plugin",
@@ -435,7 +435,6 @@
                     "craft\\elementapi\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -453,7 +452,14 @@
                 "json",
                 "yii2"
             ],
-            "time": "2017-12-13T11:16:27+00:00"
+            "support": {
+                "email": "support@craftcms.com",
+                "issues": "https://github.com/craftcms/element-api/issues?state=open",
+                "source": "https://github.com/craftcms/element-api",
+                "docs": "https://github.com/craftcms/element-api",
+                "rss": "https://github.com/craftcms/element-api/commits/v2.atom"
+            },
+            "time": "2018-06-20T17:17:30+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -1409,12 +1415,64 @@
             "time": "2017-06-30T06:21:01+00:00"
         },
         {
+            "name": "mmikkel/incognito-field",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmikkel/IncognitoField-Craft3.git",
+                "reference": "5c26d690b5c37cfccf8f8f335e4ffa7ca489bdea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmikkel/IncognitoField-Craft3/zipball/5c26d690b5c37cfccf8f8f335e4ffa7ca489bdea",
+                "reference": "5c26d690b5c37cfccf8f8f335e4ffa7ca489bdea",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0-RC1"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Incognito Field",
+                "handle": "incognito-field",
+                "schemaVersion": "1.0.0",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "changelogUrl": "https://raw.githubusercontent.com/mmikkel/incognito-field/master/CHANGELOG.md",
+                "class": "mmikkel\\incognitofield\\IncognitoField"
+            },
+            "autoload": {
+                "psr-4": {
+                    "mmikkel\\incognitofield\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mats Mikkel Rummelhoff",
+                    "homepage": "http://vaersaagod.no"
+                }
+            ],
+            "description": "PlainText drop-in replacement that can be set to disabled, hidden or readonly.",
+            "keywords": [
+                "Craft",
+                "cms",
+                "craft-plugin",
+                "craftcms",
+                "incognito field"
+            ],
+            "time": "2017-12-09T00:03:36+00:00"
+        },
+        {
             "name": "nickleguillou/craft-iot-poc",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "../craft-iot-poc",
-                "reference": "dd4db5c91263a610f734f043ae242d895c7efee8",
+                "reference": "0aecf19ac28864dece400c57da95310da9f1d22b",
                 "shasum": null
             },
             "require": {
