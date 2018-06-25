@@ -1,0 +1,38 @@
+{% extends "_layout" %}
+
+{% set deviceId = craft.app.request.getParam('id') %}
+{% set device = craft.entries.id(deviceId).one() %}
+{% set title = "Device Detail: " ~ device.title %}
+
+{% set timeSeriesRecords = craft.entries({
+    section: 'timeSeries',
+    relatedTo: { targetElement: device, field: 'device' },
+    orderBy: 'postDate desc',
+}).all() %}
+
+{% block main %}
+    <div class="mdl-cell mdl-cell--12-col">
+        <a class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" href="/">Back to Device Listing</a>
+    </div>
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-typography--display-headline">Last Updated: <span id="{{ device.key }}-updated">{{ device.dateUpdated.format('Y-m-d H:i:s') }}</span></div>
+    </div>
+   
+    
+    {% for signalData in device.lastRecording | json_decode().records %}
+        <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">{{ signalData.signal }}</h2>
+                </div>
+                
+                <div class="mdl-card__supporting-text">
+                    <div class="mdl-typography--display-2" id="{{ device.key }}-{{ signalData.signal }}">
+                        {{ signalData.value }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

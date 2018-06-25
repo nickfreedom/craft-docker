@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<head>
-  <title>Pusher Test</title>
-  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <script>
+{% extends "_layout" %}
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+{% set title = "Devices" %}
 
-    var pusher = new Pusher('9e129f0beb6fd9dbe0d9', {
-      cluster: 'us2',
-      encrypted: true
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      console.log(data.message);
-    });
-  </script>
-</head>
-<body>
-    <h1>TEST</h1>
-</body>
+{% block main %}
+  {% for device in craft.entries.section('devices').all() %}
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">{{ device.title }}</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+          <div>Key: {{ device.key }}</div>
+          <div>Serial Number: {{ device.serialNumber }}</div>
+          <div>Last reported: {{ device.dateUpdated.format('Y-m-d H:i:s') }}</div>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/deviceDetail?id={{ device.id }}">
+          View
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
