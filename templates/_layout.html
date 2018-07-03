@@ -36,9 +36,7 @@
       var channel = pusher.subscribe('my-channel');
       channel.bind('my-event', function(data) {
         console.log(data);
-
-        $('#' + data.device + '-' + data.signal).text(data.value);
-        $('#' + data.device + '-updated').text(moment().format('YYYY-MM-DD HH:mm:ss'));
+        location.reload();
       });
     </script>
 
