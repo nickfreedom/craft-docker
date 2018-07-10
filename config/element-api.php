@@ -11,7 +11,7 @@ return [
             'transformer' => function(Entry $entry) {
                 return [
                     'title' => $entry->title,
-                    'detailUrl' => UrlHelper::url("devices/{$entry->id}"),
+                    'detailUrl' => "/device/{$entry->id}",
                     'serialNumber' => $entry->getFieldValue('serialNumber'),
                     'key' => $entry->getFieldValue('key'),
                     'lastUpdate' => $entry->dateUpdated->format('Y-m-d H:i:s')

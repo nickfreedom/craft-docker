@@ -33,7 +33,7 @@
                                 {% case "location" %}
                                     {% set locationData = signalData.value | json_decode() %}
 
-                                    <div id="map" style="height:200px"></div>
+                                    <div id="map" style="height:206px"></div>
                                     <script type="text/javascript">
                                         var mymap = L.map('map').setView([{{ locationData.latitude }}, {{ locationData.longitude }}], 13);
 
@@ -87,7 +87,7 @@
                                             </div>
                                         {% endfor %}
                             {% default %}
-                                {{ signalData.value }}
+                                <h3>{{ signalData.value }}</h3>
                             {% endswitch %}
                         </div>
                     </div>
