@@ -24,12 +24,47 @@ return [
                 'criteria' => ['id' => $entryId],
                 'one' => true,
                 'transformer' => function(Entry $entry) {
+                    $signalTypesAndUnits = [];
+
+                    foreach ($entry->getFieldValue('signalTypesAndUnits')->all() as $block) {
+                         $signalTypesAndUnits[$block->targetSignal] = [
+                             'type' => $block->type->handle,
+                             'baseUnit' => $block->baseUnit,
+                             'convertTo' => $block->convertTo    
+                         ];
+                    }
+
+                    $signalTransforms = [];
+
+                    foreach ($entry->getFieldValue('signalTransforms')->all() as $block) {
+                        $targetSignal = $block->targetSignal;
+                        
+                        if (empty($signalTransforms[$targetSignal])) {
+                            $signalTransforms[$targetSignal] = [];
+                        }
+
+                        $signalTransform = [
+                            'type' => $block->type->handle,
+                        ];
+
+                        switch ($block->type->handle) {
+                            case 'round':
+                                $signalTransform['precision'] = $block->precision;
+                                break;
+                        }
+
+                        $signalTransforms[$targetSignal][] = $signalTransform;
+                    }
+
                     return [
                         'title' => $entry->title,
                         'lastUpdate' => $entry->dateUpdated->format('Y-m-d H:i:s'),
                         'serialNumber' => $entry->getFieldValue('serialNumber'),
                         'key' => $entry->getFieldValue('key'),
-                        'lastRecording' => $entry->getFieldValue('lastRecording')
+                        'lastRecording' => $entry->getFieldValue('lastRecording'),
+                        'allowRemoteControl' => $entry->getFieldValue('allowRemoteControl'),
+                        'signalTypesAndUnits' => $signalTypesAndUnits,
+                        'signalTransforms' => $signalTransforms
                     ];
                 },
             ];
