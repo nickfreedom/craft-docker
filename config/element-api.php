@@ -1,27 +1,49 @@
 <?php
 
 use craft\elements\Entry;
+use craft\elements\User;
 use craft\helpers\UrlHelper;
+use yii\web\BadRequestHttpException;
+
+function getAuthorIdFromApiKey($apiKey) {
+    $user = User::Find()
+    ->key($apiKey)
+    ->one();
+
+    if (!$user) {
+        throw new BadRequestHttpException('Invalid credentials provided.');
+    }
+
+    return $user->id;
+}
 
 return [
     'endpoints' => [
-        'devices' => [
-            'elementType' => Entry::class,
-            'criteria' => ['section' => 'devices'],
-            'transformer' => function(Entry $entry) {
-                return [
-                    'title' => $entry->title,
-                    'detailUrl' => "/device/{$entry->id}",
-                    'serialNumber' => $entry->getFieldValue('serialNumber'),
-                    'key' => $entry->getFieldValue('key'),
-                    'lastUpdate' => $entry->dateUpdated->format('Y-m-d H:i:s')
-                ];
-            },
-        ],
-        'devices/<entryId:\d+>' => function($entryId) {
+        'deviceList/<apiKey:\w+>' => function($apiKey) {
             return [
                 'elementType' => Entry::class,
-                'criteria' => ['id' => $entryId],
+                'criteria' => [
+                    'section' => 'devices',
+                    'authorId' => getAuthorIdFromApiKey($apiKey)
+                ],
+                'transformer' => function(Entry $entry) {
+                    return [
+                        'title' => $entry->title,
+                        'detailUrl' => "/device/{$entry->id}",
+                        'serialNumber' => $entry->getFieldValue('serialNumber'),
+                        'key' => $entry->getFieldValue('key'),
+                        'lastUpdate' => $entry->dateUpdated->format('Y-m-d H:i:s')
+                    ];
+                },
+            ];
+        },
+        'devices/<apiKey:\w+>/<entryId:\d+>' => function($apiKey, $entryId) {
+            return [
+                'elementType' => Entry::class,
+                'criteria' => [
+                    'id' => $entryId,
+                    'authorId' => getAuthorIdFromApiKey($apiKey)
+                ],
                 'one' => true,
                 'transformer' => function(Entry $entry) {
                     $signalTypesAndUnits = [];
