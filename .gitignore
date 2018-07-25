@@ -1,4 +1,4 @@
-/.env
-/.idea
-/vendor
+app/.env
+app/.idea
+app/vendor
 .DS_Store

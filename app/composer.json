@@ -24,7 +24,12 @@
     {
       "type": "path",
       "url": "../craft-iot-poc"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/nickfreedom/craft-iot-poc-plugin.git"
     }
+
   ],
   "require": {
     "craftcms/cms": "3.0.16.1",
@@ -32,7 +37,8 @@
     "craftcms/element-api": "2.5.3",
     "mmikkel/incognito-field": "^1.0",
     "page-8/craft-manytomany": "1.0.2.2",
-    "nickleguillou/craft-iot-poc": "^1.0"
+    "nickleguillou/craft-iot-poc": "master",
+    "yiisoft/yii2-redis": "*"
   },
   "autoload": {
     "psr-4": {

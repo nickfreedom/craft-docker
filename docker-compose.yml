@@ -1,0 +1,40 @@
+version: '2'
+
+volumes:
+  craftcms-logs:
+  app:
+  
+
+services:
+    web:
+      image: wyveo/craftcms-docker:latest
+      ports:
+        - 8080:80
+      volumes:
+        - craftcms-logs:/var/log
+        - ./app:/usr/share/nginx
+      links:
+        - redis
+
+      # env vars are replaced in .env
+      environment:
+        # Set locale to UTF-8 (https://oncletom.io/2015/docker-encoding/)
+        LANG: C.UTF-8
+
+        # REDIS is linked
+        REDIS_HOST: redis
+
+        # DB is linked
+        DB_DRIVER: mysql
+        DB_SERVER: craft-iot-poc.nickleguillou.com
+        DB_DATABASE: craft_iot
+        DB_PASSWORD: fR33d@M!
+        DB_SCHEMA: public
+        DB_PORT: '3306'
+        DB_USER: craft_iot_poc
+        LANG: C.UTF-8
+
+    redis:
+      image: redis:4.0.10-alpine
+      volumes:
+        - /data:/data
