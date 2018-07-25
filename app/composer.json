@@ -32,7 +32,7 @@
 
   ],
   "require": {
-    "craftcms/cms": "3.0.16.1",
+    "craftcms/cms": "3.0.17.1",
     "vlucas/phpdotenv": "^2.4.0",
     "craftcms/element-api": "2.5.3",
     "mmikkel/incognito-field": "^1.0",
