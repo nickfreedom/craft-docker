@@ -1,20 +1,22 @@
 version: '2'
 
 volumes:
-  craftcms-logs:
   app:
-  
+  craftcms-logs:
+  mysql:  
 
 services:
     web:
-      image: wyveo/craftcms-docker:latest
+      build: .
       ports:
-        - 8080:80
+        - 80:80
+        - 443:443
       volumes:
         - craftcms-logs:/var/log
         - ./app:/usr/share/nginx
       links:
         - redis
+        - mysql
 
       # env vars are replaced in .env
       environment:
@@ -26,7 +28,7 @@ services:
 
         # DB is linked
         DB_DRIVER: mysql
-        DB_SERVER: craft-iot-poc.nickleguillou.com
+        DB_SERVER: mysql
         DB_DATABASE: craft_iot
         DB_PASSWORD: fR33d@M!
         DB_SCHEMA: public
@@ -38,3 +40,15 @@ services:
       image: redis:4.0.10-alpine
       volumes:
         - /data:/data
+
+    mysql:
+      image: mysql:5
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: fR33d@M!
+        MYSQL_USER: craft_iot_poc
+        MYSQL_PASSWORD: fR33d@M!
+      volumes:
+        - mysql:/var/lib/mysql
+
