@@ -1,4 +1,3 @@
-app/.env
-app/.idea
-app/vendor
+app
+craft-iot-poc
 .DS_Store
